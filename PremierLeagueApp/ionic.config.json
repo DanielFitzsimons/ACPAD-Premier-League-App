@@ -1,0 +1,7 @@
+{
+  "name": "PremierLeagueApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
