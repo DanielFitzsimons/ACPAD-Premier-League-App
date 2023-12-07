@@ -1,0 +1,36 @@
+
+<!-- standings.component.html -->
+<div class="standings-container">
+  <div class="select-container">
+    <select
+      name="select-league"
+      id="select-league"
+      [(ngModel)]="selectedLeague"
+      (change)="onLeagueChange(selectedLeague)"
+    >
+      <option value="39">English Premier League</option>
+      <!-- Add other league options if needed -->
+    </select>
+    <select
+      name="select-year"
+      id="select-year"
+      [(ngModel)]="selectedYear"
+      (change)="onYearChange(selectedYear)"
+    >
+      <option value="2022">2022</option>
+      <!-- Add other year options if needed -->
+    </select>
+  </div>
+  <div class="standing-results">
+    <ul *ngFor="let league of standings | keyvalue">
+      <li *ngFor="let team of league.value">
+        <span>{{ team.position }}. </span>
+        <img src="{{ team.team.logo }}" alt="{{ team.team.name }}" />
+        {{ team.team.name }}
+      </li>
+    </ul>
+  </div>
+  
+</div>
+
+

@@ -29,7 +29,7 @@
       Create
     </ion-button>
 
-    <ion-item *ngIf="isResetState">
+    <ion-item *ngIf="isResetState()">
       <ion-label position="floating">Email</ion-label>
       <ion-input placeholder="Email" formControlName="email" type="email"></ion-input>
     </ion-item>
@@ -40,12 +40,12 @@
 
   <ion-row justify-content-center>
     <ion-col>
-      <ion-button (click)="resetPassState()" expand="full">Forgot Password</ion-button>
+      <ion-button (click)="loginState()" expand="full">Login</ion-button>
     </ion-col>
     <ion-col><ion-button (click)="registerState()" expand="full">Create An Account</ion-button>
     </ion-col>
     <ion-col>
-      <ion-button (click)="loginState()" expand="full">Login</ion-button>
+      <ion-button (click)="resetPassState()" expand="full">Forgot Password</ion-button>
     </ion-col>
   </ion-row>
 </ion-content>
