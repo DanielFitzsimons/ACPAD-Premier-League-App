@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { PremierLeagueComponent } from './components/premier-league/premier-league.component';
 
+
 const routes: Routes = [
   {
     path: 'home',
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'premier-league',
     component: PremierLeagueComponent
+  },
+  {
+    path: 'fixture',
+    loadChildren: () => import('./pages/fixture/fixture.module').then( m => m.FixturePageModule)
   },
 ];
 

@@ -1,36 +1,42 @@
 
-<!-- standings.component.html -->
-<div class="standings-container">
-  <div class="select-container">
-    <select
-      name="select-league"
-      id="select-league"
-      [(ngModel)]="selectedLeague"
-      (change)="onLeagueChange(selectedLeague)"
-    >
-      <option value="39">English Premier League</option>
-      <!-- Add other league options if needed -->
-    </select>
-    <select
-      name="select-year"
-      id="select-year"
-      [(ngModel)]="selectedYear"
-      (change)="onYearChange(selectedYear)"
-    >
-      <option value="2022">2022</option>
-      <!-- Add other year options if needed -->
-    </select>
-  </div>
-  <div class="standing-results">
-    <ul *ngFor="let league of standings | keyvalue">
-      <li *ngFor="let team of league.value">
-        <span>{{ team.position }}. </span>
-        <img src="{{ team.team.logo }}" alt="{{ team.team.name }}" />
-        {{ team.team.name }}
-      </li>
-    </ul>
-  </div>
-  
-</div>
+<ion-header>
+  <ion-button (click)="goHome()">Home</ion-button>
+</ion-header>
 
+<ion-content>
+  <div *ngIf="seasons && seasons.length > 0" class="season-selector">
+    <label for="seasonSelect">Select Season:</label>
+    <select id="seasonSelect" [(ngModel)]="selectedSeason" (change)="onSeasonChange($event)">
+      <option *ngFor="let season of seasons" [value]="season.year">{{ season.year }}</option>
+    </select>
+  </div>
+
+  <div *ngIf="standings && standings.length > 0" class="standings-container">
+    <h2>Standings for Season {{ selectedSeason }}</h2>
+    <!-- Add this just before the table -->
+<pre>{{ standings | json }}</pre>
+
+    <table class="standings-table">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Team</th>
+          <th>Points</th>
+          <th>Goals Difference</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let teamStanding of standings[0]">
+          <td>{{ teamStanding.rank }}</td>
+          <td>
+            <img src="{{ teamStanding.team.logo }}" alt="{{ teamStanding.team.name }}" width="20" height="20">
+            {{ teamStanding.team.name }}
+          </td>
+          <td>{{ teamStanding.points }}</td>
+          <td>{{ teamStanding.goalsDiff }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ion-content>
 

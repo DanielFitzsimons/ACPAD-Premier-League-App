@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-button (click)="goHome()">home</ion-button>
+</ion-header>
+
+<div *ngIf="fixtures && fixtures.length > 0">
+  <h2>Fixtures</h2>
+  <table class="fixtures-table">
+    <thead>
+      <tr>
+        <th>Fixture ID</th>
+        <th>Kickoff Time</th>
+        <th>Team H</th>
+        <th>Score (Team H)</th>
+        <th>Team A</th>
+        <th>Score (Team A)</th>
+        <th>Minutes</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fixture of fixtures">
+        <td>{{ fixture.id }}</td>
+        <td>{{ fixture.kickoff_time | date:'medium' }}</td>
+        <td>{{ fixture.team_h }}</td>
+        <td>{{ fixture.team_h_score }}</td>
+        <td>{{ fixture.team_a }}</td>
+        <td>{{ fixture.team_a_score }}</td>
+        <td>{{ fixture.minutes }}</td>
+       
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -14,4 +14,8 @@ export class HomePage {
     // Use NavController to navigate to the Premier League component
     this.navCtrl.navigateForward('/premier-league');
   }
+
+  goFixtures(){
+    this.navCtrl.navigateForward('/fixture');
+  }
 }
