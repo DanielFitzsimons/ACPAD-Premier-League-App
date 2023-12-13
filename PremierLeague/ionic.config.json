@@ -1,0 +1,7 @@
+{
+  "name": "PremierLeague",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

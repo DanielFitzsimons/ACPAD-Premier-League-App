@@ -1,0 +1,42 @@
+
+<ion-header>
+  <ion-button (click)="goHome()">Home</ion-button>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="seasons && seasons.length > 0" class="season-selector">
+    <label for="seasonSelect">Select Season:</label>
+    <select id="seasonSelect" [(ngModel)]="selectedSeason" (change)="onSeasonChange($event)">
+      <option *ngFor="let season of seasons" [value]="season.year">{{ season.year }}</option>
+    </select>
+  </div>
+
+  <div *ngIf="standings && standings.length > 0" class="standings-container">
+    <h2>Standings for Season {{ selectedSeason }}</h2>
+    <!-- Add this just before the table -->
+<pre>{{ standings | json }}</pre>
+
+    <table class="standings-table">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Team</th>
+          <th>Points</th>
+          <th>Goals Difference</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let teamStanding of standings[0]">
+          <td>{{ teamStanding.rank }}</td>
+          <td>
+            <img src="{{ teamStanding.team.logo }}" alt="{{ teamStanding.team.name }}" width="20" height="20">
+            {{ teamStanding.team.name }}
+          </td>
+          <td>{{ teamStanding.points }}</td>
+          <td>{{ teamStanding.goalsDiff }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ion-content>
+
