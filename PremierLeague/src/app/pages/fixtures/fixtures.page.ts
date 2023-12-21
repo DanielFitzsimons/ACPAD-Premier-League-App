@@ -8,21 +8,31 @@ import { NavController } from '@ionic/angular';
 })
 export class FixturesPage implements OnInit {
 
-  fixtures: any;
+  fixtures: any[] = [];
 
   constructor(private footballService: FootballService, private navctrl: NavController,) {}
 
   ngOnInit(): void {
-    this.footballService.getFixtures().subscribe(
-      (data) => {
-        this.fixtures = data;
-        console.log('Fixtures Data:', this.fixtures);
+    // Assuming you want to fetch fixtures for the 2020 season initially
+    const initialSeason = '2020';
+    this.fetchFixturesForSeason(initialSeason);
+  }
+  
+
+  fetchFixturesForSeason(season: string): void {
+    const leagueId = '39'; // Premier League ID
+  
+    this.footballService.getFixtures(leagueId, season).subscribe(
+      (fixtures) => {
+        console.log('Fixtures Data:', fixtures);
+        this.fixtures = fixtures;
       },
       (error) => {
         console.error('Error fetching fixtures:', error);
       }
     );
   }
+  
 
   goHome(){
     this.navctrl.navigateForward('/home');

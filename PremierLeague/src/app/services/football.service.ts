@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import axios from 'axios';
 @Injectable({
@@ -51,29 +51,22 @@ export class FootballService {
       .pipe(map(teams => teams.sort((a, b) => a.position - b.position)));
   }
 
- private apiUrl1 = 'https://fantasy-premier-league3.p.rapidapi.com/fixtures';
 
- getFixtures(): Observable<any> {
-   const options = {
-     method: 'GET',
-     url: this.apiUrl1,
-     params: { gw: '11' },
-     headers: {
-       'X-RapidAPI-Key': '1b64368b0fmsh47b5560a2453b93p1b1fc0jsnb6f1875e34e9',
-       'X-RapidAPI-Host': 'fantasy-premier-league3.p.rapidapi.com'
-     }
-   };
 
-   return new Observable((observer) => {
-     axios
-       .request(options)
-       .then((response) => {
-         observer.next(response.data);
-         observer.complete();
-       })
-       .catch((error) => {
-         observer.error(error);
-       });
-   });
- }
+
+getFixtures(leagueId: string, season: string): Observable<any> {
+  const headers = {
+    'X-RapidAPI-Key': '1b64368b0fmsh47b5560a2453b93p1b1fc0jsnb6f1875e34e9',
+    'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com',
+  };
+
+  const params = new HttpParams()
+    .set('league', leagueId)
+    .set('season', season);
+
+  return this.http.get(`${this.apiUrl}/fixtures`, { headers, params })
+  .pipe(
+    map((response: any) => response?.response ?? [])
+  );
+}
 }

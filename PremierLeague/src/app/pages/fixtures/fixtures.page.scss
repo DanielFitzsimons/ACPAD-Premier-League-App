@@ -1,0 +1,15 @@
+/* Add spacing between columns */
+ion-col {
+    padding: 5px; /* Adjust the padding as needed */
+  }
+  
+  /* Add spacing between rows */
+  ion-row {
+    margin-bottom: 10px; /* Adjust the margin as needed */
+  }
+  
+  /* Style the headers (optional) */
+  ion-row:first-child {
+    font-weight: bold; /* Make the headers bold */
+  }
+  
