@@ -1,42 +1,57 @@
-
 <ion-header>
-  <ion-button (click)="goHome()">Home</ion-button>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goHome()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ league?.name }} - Season {{ selectedSeason }}</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div *ngIf="seasons && seasons.length > 0" class="season-selector">
-    <label for="seasonSelect">Select Season:</label>
-    <select id="seasonSelect" [(ngModel)]="selectedSeason" (change)="onSeasonChange($event)">
-      <option *ngFor="let season of seasons" [value]="season.year">{{ season.year }}</option>
-    </select>
+  <div *ngIf="seasons && seasons.length > 0">
+    <ion-label>Select Season:</ion-label>
+    <ion-select [(ngModel)]="selectedSeason" (ionChange)="onSeasonChange($event)">
+      <ion-select-option *ngFor="let season of seasons" [value]="season.year">
+        {{ season.year }}
+      </ion-select-option>
+    </ion-select>
   </div>
 
-  <div *ngIf="standings && standings.length > 0" class="standings-container">
-    <h2>Standings for Season {{ selectedSeason }}</h2>
-    <!-- Add this just before the table -->
-<pre>{{ standings | json }}</pre>
-
-    <table class="standings-table">
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Team</th>
-          <th>Points</th>
-          <th>Goals Difference</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let teamStanding of standings[0]">
-          <td>{{ teamStanding.rank }}</td>
-          <td>
-            <img src="{{ teamStanding.team.logo }}" alt="{{ teamStanding.team.name }}" width="20" height="20">
-            {{ teamStanding.team.name }}
-          </td>
-          <td>{{ teamStanding.points }}</td>
-          <td>{{ teamStanding.goalsDiff }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <!-- Table with additional styling -->
+  <ion-grid *ngIf="standings && standings.length > 0">
+    <ion-row class="table-header">
+      <ion-col size="1">#</ion-col>
+      <ion-col size="1">Logo</ion-col>
+      <ion-col>Team</ion-col>
+      <ion-col size="1">Played</ion-col>
+      <ion-col size="1">Wins</ion-col>
+      <ion-col size="1">Draws</ion-col>
+      <ion-col size="1">Losses</ion-col>
+      <ion-col size="1">GF</ion-col>
+      <ion-col size="1">GA</ion-col>
+      <ion-col size="1" class="highlighted-column">GD</ion-col>
+      <ion-col size="1">Points</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let standing of standings; let i = index" class="table-row">
+      <ion-col size="1">{{ i + 1 }}</ion-col>
+      <ion-col size="1" class="logo-col">
+        <ion-img [src]="standing.team.logo" style="width: auto; height: 30px;"></ion-img>
+      </ion-col>
+      <ion-col>{{ standing.team.name }}</ion-col>
+      <ion-col size="1">{{ standing.all.played }}</ion-col>
+      <ion-col size="1">{{ standing.all.win }}</ion-col>
+      <ion-col size="1">{{ standing.all.draw }}</ion-col>
+      <ion-col size="1">{{ standing.all.lose }}</ion-col>
+      <ion-col size="1">{{ standing.all.goals.for }}</ion-col>
+      <ion-col size="1">{{ standing.all.goals.against }}</ion-col>
+      <ion-col size="1" class="highlighted-column">{{ standing.goalsDiff }}</ion-col>
+      <ion-col size="1">{{ standing.points }}</ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <ion-text *ngIf="!(standings && standings.length > 0)">
+    No standings available for the selected season.
+  </ion-text>
 </ion-content>
-

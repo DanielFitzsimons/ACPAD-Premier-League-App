@@ -2,7 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FootballService } from 'src/app/services/football.service';
 import { NavController } from '@ionic/angular';
-
+import { catchError } from 'rxjs';
+import { of } from 'rxjs';
 @Component({
   selector: 'app-premier-league',
   templateUrl: './premier-league.component.html',
@@ -20,25 +21,30 @@ export class PremierLeagueComponent implements OnInit {
 
   ngOnInit(): void {
     const desiredLeagueId = '39'; // Replace with the actual league ID
-    this.footballService.getLeagueById(desiredLeagueId).subscribe(
-      (response) => {
-        console.log('League Information:', response);
-        this.country = response?.country;
-        this.league = response?.league;
-        this.seasons = response?.seasons || []; // Ensure seasons is an array, even if empty
-        this.selectedSeason = this.seasons.length > 0 ? this.seasons[0].year : 0; // Set the default season if available
-
+    this.footballService.getLeagueById(desiredLeagueId)
+    .pipe(
+      catchError(error => {
+        console.error('Error fetching league information:', error);
+        return of(null); // Handle the error and return an observable with null value
+      })
+    )
+    .subscribe(response => {
+      if (response) {
+        this.country = response?.response?.[0]?.country;
+        this.league = response?.response?.[0]?.league;
+        this.seasons = response?.response?.[0]?.seasons || [];
+  
         console.log('Country:', this.country);
         console.log('League:', this.league);
         console.log('Seasons:', this.seasons);
-
-        // Fetch standings for the selected season
-        this.fetchStandingsForSeason(this.selectedSeason);
-      },
-      (error) => {
-        console.error('Error fetching league information:', error);
+  
+        if (this.seasons.length > 0) {
+          this.selectedSeason = this.seasons[0].year;
+          this.fetchStandingsForSeason(this.selectedSeason);
+        }
       }
-    );
+    })
+    
   }
 
   goHome() {
@@ -53,19 +59,33 @@ export class PremierLeagueComponent implements OnInit {
   }
 
 
-  private fetchStandingsForSeason(selectedSeason: number) {
-    const leagueId = '39'; // Replace with the actual league ID
-  
-    this.footballService.getStandings(leagueId, selectedSeason.toString()).subscribe(
-      (standingsData) => {
-        console.log('Standings for Season:', this.selectedSeason, standingsData);
-        this.standings = standingsData || [];
-      },
-      (error) => {
-        console.error('Error fetching standings:', error);
-      }
-    );
+ private fetchStandingsForSeason(selectedSeason: number) {
+  const leagueId = '39'; // Replace with the actual league ID
+// Inside your component's fetchStandingsForSeason or similar method
+
+this.footballService.getStandings(leagueId, selectedSeason.toString()).subscribe(
+  (data) => {
+    // Make sure to access the nested standings array correctly
+    if (data && data.response && data.response.length > 0 && data.response[0].league.standings && data.response[0].league.standings.length > 0) {
+      this.standings = data.response[0].league.standings[0];
+      console.log('Standings:', this.standings);
+    } else {
+      // If data is not structured as expected, log the raw data to inspect it
+      console.error('Standings data is not available or not in the expected format:', data);
+      this.standings = []; // Reset standings to an empty array to avoid template errors
+    }
+  },
+  (error) => {
+    console.error('Error fetching standings:', error);
+    this.standings = []; // Reset standings to an empty array to handle errors
   }
+);
+
+
+
+  
+}
+
   
   
 

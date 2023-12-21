@@ -1,0 +1,36 @@
+/* premier-league.component.scss */
+
+.table-header {
+    background-color: #f0f0f0;
+  }
+  
+  .highlighted-column {
+    background-color: #e8e8e8;
+  }
+  
+  .table-row {
+    border-bottom: 1px solid #dcdcdc;
+  }
+  
+  /* Add padding for table cells if needed */
+  ion-col {
+    padding: 8px;
+  }
+
+  /* premier-league.component.scss */
+
+/* ... existing styles ... */
+
+.logo-col {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+  }
+  
+  .team-logo {
+    max-width: 100%;   /* Ensure the logo is fully contained within the cell */
+    max-height: 30px;  /* Adjust the height as needed */
+    object-fit: contain; /* Ensure the logo maintains its aspect ratio */
+  }
+  
+  
