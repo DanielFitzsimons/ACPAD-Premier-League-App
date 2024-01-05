@@ -9,13 +9,12 @@ import { NavController } from '@ionic/angular';
 export class FixturesPage implements OnInit {
 
   fixtures: any[] = [];
-
+  selectedSeason: string = '2020';
   constructor(private footballService: FootballService, private navctrl: NavController,) {}
 
   ngOnInit(): void {
     // Assuming you want to fetch fixtures for the 2020 season initially
-    const initialSeason = '2020';
-    this.fetchFixturesForSeason(initialSeason);
+    this.fetchFixturesForSeason(this.selectedSeason);
   }
   
 
@@ -33,6 +32,10 @@ export class FixturesPage implements OnInit {
     );
   }
   
+  onSeasonChange(newSeason: string): void {
+    this.selectedSeason = newSeason;
+    this.fetchFixturesForSeason(this.selectedSeason);
+  }
 
   goHome(){
     this.navctrl.navigateForward('/home');

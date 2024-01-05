@@ -12,4 +12,59 @@ ion-col {
   ion-row:first-child {
     font-weight: bold; /* Make the headers bold */
   }
+
+  table {
+    width: 100%;
+    border-collapse: collapse; /* Ensures that table borders are collapsed into a single border */
+    font-family: 'Arial', sans-serif; /* Modern font */
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left; /* Aligns text to the left */
+  }
+  
+  th {
+    background-color: #007bff; /* Premier League blue for header */
+    color: white;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2; /* Alternating row colors */
+  }
+  
+  tr:nth-child(odd) {
+    background-color: #ffffff; /* Alternating row colors */
+  }
+  
+  td {
+    border-bottom: 1px solid #ddd; /* Lines between each fixture */
+  }
+  
+  .team-name {
+    font-weight: bold; /* Make team names bold */
+  }
+  
+  .team-crest {
+    width: 30px; /* Adjust size of team crests */
+    height: auto;
+    vertical-align: middle; /* Align crests with text */
+  }
+  
+  .team-info {
+    display: flex; /* Aligns children (logo and name) in a row */
+    align-items: center; /* Centers children vertically */
+  }
+  
+  .team-crest {
+    width: 30px; /* Adjust the size as needed */
+    height: auto;
+    margin-right: 8px; /* Add some space between the logo and the name */
+  }
+  
+  .team-name {
+    font-weight: bold; /* Make the team name bold */
+  }
+  
+  
   

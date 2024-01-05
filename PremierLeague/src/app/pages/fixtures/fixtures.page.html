@@ -2,7 +2,12 @@
   <ion-button (click)="goHome()">home</ion-button>
 </ion-header>
 <ion-content>
-<!-- ... existing HTML for standings ... -->
+  <ion-select [(ngModel)]="selectedSeason" (ionChange)="onSeasonChange($event.target.value)">
+    <ion-select-option value="2020">2020/2021</ion-select-option>
+    <ion-select-option value="2021">2021/2022</ion-select-option>
+    <ion-select-option value="2022">2022/2023</ion-select-option>
+    <ion-select-option value="2023">2023/2024</ion-select-option>
+  </ion-select>
 
 <!-- Section to display fixtures -->
 <ion-grid *ngIf="fixtures && fixtures.length > 0">
@@ -15,14 +20,14 @@
   </ion-row>
   <ion-row *ngFor="let fixture of fixtures">
     <ion-col>{{ fixture.fixture.date | date: 'shortDate' }}</ion-col>
-    <ion-col>
-      <ion-img [src]="fixture.teams.home.logo" style="width: 30px;"></ion-img>
-      <ion-col>{{ fixture.teams.home.name }}</ion-col>
+    <ion-col class="team-info">
+      <ion-img class="team-crest" [src]="fixture.teams.home.logo"></ion-img>
+      <ion-label class="team-name">{{ fixture.teams.home.name }}</ion-label>
     </ion-col>
     <ion-col>{{ fixture.goals.home }}</ion-col>
-    <ion-col>
-      <ion-img [src]="fixture.teams.away.logo" style="width: 30px;"></ion-img>
-      <ion-col>{{ fixture.teams.away.name }}</ion-col>
+    <ion-col class="team-info">
+      <ion-img class="team-crest" [src]="fixture.teams.away.logo"></ion-img>
+      <ion-label class="team-name">{{ fixture.teams.away.name }}</ion-label>
     </ion-col>
     <ion-col>{{ fixture.goals.away }}</ion-col>
   </ion-row>
