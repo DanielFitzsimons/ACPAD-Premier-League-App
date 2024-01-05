@@ -17,4 +17,8 @@ export class HomePage {
   goFixtures(){
     this.navCtrl.navigateForward('/fixtures');
   }
+
+  seePlayers(){
+    this.navCtrl.navigateForward('/players')
+  }
 }

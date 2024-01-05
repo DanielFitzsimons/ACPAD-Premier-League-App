@@ -69,4 +69,12 @@ getFixtures(leagueId: string, season: string): Observable<any> {
     map((response: any) => response?.response ?? [])
   );
 }
+
+getPlayers(teamId: string) {
+  return this.http.get<any>(`${this.apiUrl}/teams/${teamId}/players`).pipe(
+    map(response => response.response) // Assuming 'response' is the property you want
+  );
+}
+
+
 }
