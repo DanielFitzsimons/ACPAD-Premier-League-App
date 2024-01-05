@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'premier-league',
     component: PremierLeagueComponent
+  },
+  {
+    path: 'players',
+    loadChildren: () => import('./pages/players/players.module').then( m => m.PlayersPageModule)
   },
 ];
 
