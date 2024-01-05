@@ -71,7 +71,7 @@ export class LoginPage implements OnInit {
 
     // If the user is successfully created, redirect to the home page. Otherwise, display an error.
     if (user) {
-      this.router.navigateByUrl('/profile', { replaceUrl: true });
+      this.router.navigateByUrl('/home', { replaceUrl: true });
       
       
     } else {

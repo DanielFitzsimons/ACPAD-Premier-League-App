@@ -5,47 +5,72 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <div class="login-card-container">
+    <ion-card>
+      <ion-card-header>
+        Please Login or Register!
+      </ion-card-header>
 
+      <ion-card-content>
+        <form [formGroup]="credentials">
+          <div *ngIf="isLoginState()">
+            <ion-item class="centered-label">
+                <ion-label position="floating">Email</ion-label>
+                <ion-input placeholder="Email" formControlName="email" type="email"></ion-input>
+            </ion-item>
+            <ion-item class="centered-label">
+                <ion-label position="floating">Password</ion-label>
+                <ion-input placeholder="Password" formControlName="password" type="password"></ion-input>
+            </ion-item>
+        </div>
+        
+          <ion-button expand="full" color="primary" (click)="login()" *ngIf="isLoginState()">
+            Login
+          </ion-button>
+        
+          <div *ngIf="isRegisterState()">
+            <ion-item class="centered-label">
+                <ion-label position="floating">Email</ion-label>
+                <ion-input placeholder="Email" formControlName="email" type="email"></ion-input>
+            </ion-item>
+            <ion-item class="centered-label">
+                <ion-label position="floating">Password</ion-label>
+                <ion-input placeholder="Password" formControlName="password" type="password"></ion-input>
+            </ion-item>
+        </div>
+          <ion-button expand="full" color="primary" (click)="register()" *ngIf="isRegisterState()">
+            Create
+          </ion-button>
+        
+          <div *ngIf="isResetState()">
+            <ion-item class="centered-label">
+                <ion-label position="floating">Email</ion-label>
+                <ion-input placeholder="Email" formControlName="email" type="email"></ion-input>
+            </ion-item>
+        </div>
+          <ion-button expand="full" color="primary" (click)="sendReset()" *ngIf="isResetState()">
+            Reset
+          </ion-button>
+        </form>
+        
+        <ion-row justify-content-center>
+          <ion-col>
+            <ion-button (click)="loginState()" expand="full">Login</ion-button>
+          </ion-col>
+          <ion-col><ion-button (click)="registerState()" expand="full">Create An Account</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button (click)="resetPassState()" expand="full">Forgot Password</ion-button>
+          </ion-col>
+        </ion-row>
+        
+      </ion-card-content>
+    </ion-card>
+  </div>
 
-  <form [formGroup]="credentials">
-
-    <ion-item *ngIf="isLoginState()">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input placeholder="Email" formControlName="email" type="email"></ion-input>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input placeholder="Password" formControlName="password" type="password"></ion-input>
-    </ion-item>
-    <ion-button expand="full" color="primary" (click)="login()" *ngIf="isLoginState()">
-      Login
-    </ion-button>
- 
-    <ion-item *ngIf="isRegisterState()">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input placeholder="Email" formControlName="email" type="email"></ion-input>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input placeholder="Password" formControlName="password" type="password"></ion-input>
-    </ion-item>
-    <ion-button expand="full" color="primary" (click)="register()" *ngIf="isRegisterState()">
-      Create
-    </ion-button>
-
-    <ion-item *ngIf="isResetState()">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input placeholder="Email" formControlName="email" type="email"></ion-input>
-    </ion-item>
-    <ion-button expand="full" color="primary" (click)="sendReset()" *ngIf="isResetState()">
-      Reset
-    </ion-button>
-  </form>
-
-  <ion-row justify-content-center>
-    <ion-col>
-      <ion-button (click)="loginState()" expand="full">Login</ion-button>
-    </ion-col>
-    <ion-col><ion-button (click)="registerState()" expand="full">Create An Account</ion-button>
-    </ion-col>
-    <ion-col>
-      <ion-button (click)="resetPassState()" expand="full">Forgot Password</ion-button>
-    </ion-col>
-  </ion-row>
 </ion-content>
+
+
+
+
+ 

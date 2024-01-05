@@ -1,0 +1,107 @@
+/* Custom styles for the login page */
+
+ion-header {
+    --background: rgba(255, 255, 255, 0.9); /* Lightly transparent background */
+    --ion-color-base: #f4f4f4; /* Light grey for the header base */
+  }
+  
+  ion-toolbar {
+    --padding-start: 16px;
+    --padding-end: 16px;
+  }
+  
+  ion-title {
+    color: #007bff; /* Premier League blue */
+    text-align: center;
+    font-size: 1.5em; /* Larger font size for title */
+  }
+  
+  ion-content {
+    --background: none;
+    background-image: url('/assets/PitchView.png');
+    background-size: cover;
+    background-position: center;
+}
+
+  
+  ion-item {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    --inner-padding-start: 0;
+    --padding-end: 0;
+    --min-height: 50px; /* Adjust the height of ion-item */
+    --border-color: #ddd; /* Border color for the input */
+    --background: #ffffff; /* White background for input field */
+    margin-bottom: 16px; /* Spacing between fields */
+  }
+  
+  ion-input {
+    --placeholder-color: #bbb; /* Placeholder color */
+    --placeholder-opacity: 1; /* Make placeholder fully visible */
+    --color: #333; /* Text color */
+    --padding-start: 16px; /* Padding inside the input */
+    --padding-end: 16px; /* Padding inside the input */
+  }
+  
+  ion-label {
+    color: #333; /* Text color for label */
+  }
+  
+  ion-button {
+    margin-top: 20px; /* Space above the button */
+    --background: #007bff; /* Premier League blue for buttons */
+    --border-radius: 4px; /* Rounded corners for buttons */
+    --padding-top: 10px; /* Padding for button content */
+    --padding-bottom: 10px; /* Padding for button content */
+    --color: #fff; /* Text color for buttons */
+  }
+  
+  ion-row {
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  ion-col {
+    padding: 8px;
+  }
+  
+  ion-col ion-button {
+    --background: #fff; /* White background for secondary buttons */
+    --color: #007bff; /* Premier League blue for text */
+    --border: 1px solid #007bff; /* Border to match text color */
+    --border-radius: 4px; /* Rounded corners for buttons */
+    --padding-top: 10px; /* Padding for button content */
+    --padding-bottom: 10px; /* Padding for button content */
+  }
+
+  .login-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  ion-card {
+    margin: 16px; /* Provides some spacing from the screen edges */
+    width: 100%;
+    max-width: 400px; /* Adjust the max width as per your design preference */
+    background: rgba(255, 255, 255, 0.8);
+  }
+  
+  ion-card-header {
+    text-align: center;
+  }
+  
+  ion-card-title {
+    font-size: 1.5em;
+    color: #007bff; /* Premier League blue */
+  }
+  
+  ion-card-content {
+    padding: 16px;
+  }
+  
+  
+
+  
+  
