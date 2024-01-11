@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import axios from 'axios';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -35,21 +35,7 @@ export class FootballService {
     return this.http.get(`${this.apiUrl}/standings`, { headers, params });
   }
 
-  private getHeaders(): HttpHeaders {
-    return new HttpHeaders({
-      'X-RapidAPI-Key': this.apiKey,
-      'X-RapidAPI-Host': 'fantasy-premier-league3.p.rapidapi.com'
-    });
-  }
-
-  getTeams(): Observable<any[]> {
-    const options = {
-      headers: this.getHeaders()
-    };
-
-    return this.http.get<any[]>(this.apiUrl, options)
-      .pipe(map(teams => teams.sort((a, b) => a.position - b.position)));
-  }
+ 
 
 
 
@@ -70,11 +56,39 @@ getFixtures(leagueId: string, season: string): Observable<any> {
   );
 }
 
-getPlayers(teamId: string) {
-  return this.http.get<any>(`${this.apiUrl}/teams/${teamId}/players`).pipe(
-    map(response => response.response) // Assuming 'response' is the property you want
+
+private getHeaders(): HttpHeaders {
+  return new HttpHeaders({
+    'X-RapidAPI-Key': this.apiKey,
+    'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+  });
+}
+
+getTeamPlayers(teamId: number): Observable<any> {
+  const url = `${this.apiUrl}/players/squads`;
+  const params = new HttpParams().set('team', teamId.toString());
+  const headers = this.getHeaders();
+
+  return this.http.get(url, { headers, params }).pipe(
+    map((response: any) => {
+      // Log the response to see its structure
+      console.log(response);
+
+      // Adjusted logic to handle a potentially undefined response
+      if (response && response.response && Array.isArray(response.response) && response.response.length > 0) {
+        return response.response[0].players;
+      } else {
+        // Handle the case where response is not in the expected format
+        console.error('Unexpected response format:', response);
+        return [];
+      }
+    })
   );
 }
 
 
 }
+
+
+
+
