@@ -8,8 +8,10 @@ import {
   
 } from '@angular/fire/auth';
 import { doc, Firestore, setDoc} from '@angular/fire/firestore';
-
+import { Dialog } from '@capacitor/dialog';
 import { LoadingController } from '@ionic/angular';
+
+import { NavController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +20,7 @@ export class AuthenticationService {
   private isAuthenticated: boolean = false;
  
 
-  constructor(private auth:Auth, private firestore: Firestore, private loadingController: LoadingController) { }
+  constructor(private auth:Auth, private firestore: Firestore, private loadingController: LoadingController, private navCtrl: NavController) { }
 
 
 
@@ -80,27 +82,30 @@ export class AuthenticationService {
  
 
 
-  async logout() {
-    try {
-      const currentUser = this.getCurrentUser();
-      const userEmail = currentUser ? currentUser.email : 'Unknown';
-  
-      const loading = await this.loadingController.create({
-        message: 'Logging out...',
-        spinner: 'crescent', // You can choose a different spinner if you want
-      });
-      await loading.present();
-  
+ 
+
+async logout() {
+  try {
+    const result = await Dialog.confirm({
+      title: 'Logout',
+      message: 'Are you sure you want to logout?',
+    });
+
+    if (result.value) {
+      // User clicked "OK" in the dialog
       await signOut(this.auth);
       this.isAuthenticated = false;
-  
-      await loading.dismiss();
-  
-      console.log(`User with email ${userEmail} logged out successfully`);
-    } catch (error) {
-      console.error('Error during logout: ', error);
+
+      this.navCtrl.navigateRoot('/login');
+    } else {
+      // User clicked "Cancel" or closed the dialog
+      console.log('Logout canceled');
     }
+  } catch (error) {
+    console.error('Error during logout: ', error);
   }
+}
+
   
   
 }

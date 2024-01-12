@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { AuthenticationService } from '../services/authentication.service';
-import { Dialog } from '@capacitor/dialog';
 import { FootballService } from '../services/football.service';
 @Component({
   selector: 'app-home',
@@ -29,7 +28,7 @@ loadTopScorers() {
           goals: scorer.statistics[0].goals.total,
           team: scorer.statistics[0].team.name,
           photo: scorer.player.photo,
-          // Add any other data you might need
+          
         };
       });
     },
@@ -57,6 +56,6 @@ loadTopScorers() {
 
   async logout() {
     await this.auth.logout();
-    // After logout, navigate to the login page or any other page as needed
+    
   }
 }
