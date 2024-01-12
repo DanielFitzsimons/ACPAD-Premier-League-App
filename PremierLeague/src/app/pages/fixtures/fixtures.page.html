@@ -1,6 +1,21 @@
 <ion-header>
-  <ion-button (click)="goHome()">home</ion-button>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goHome()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-item lines="none">
+      <ion-avatar slot="start">
+        <ion-img [src]="league?.logo"></ion-img>
+      </ion-avatar>
+      <ion-label>
+        <h1>{{ league?.name }}</h1>
+      </ion-label>
+    </ion-item>
+  </ion-toolbar>
 </ion-header>
+
 <ion-content>
   <ion-select [(ngModel)]="selectedSeason" (ionChange)="onSeasonChange($event.target.value)">
     <ion-select-option value="2020">2020/2021</ion-select-option>
