@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-
+import { catchError, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -71,17 +71,29 @@ getTeamPlayers(teamId: number): Observable<any> {
 
   return this.http.get(url, { headers, params }).pipe(
     map((response: any) => {
-      // Log the response to see its structure
       console.log(response);
-
-      // Adjusted logic to handle a potentially undefined response
       if (response && response.response && Array.isArray(response.response) && response.response.length > 0) {
-        return response.response[0].players;
+        // Assuming the response contains a 'team' object and a 'players' array
+        const teamData = response.response[0].team; // Now also extracting the team data
+        const playersData = response.response[0].players;
+        return { team: teamData, players: playersData }; // Return both team and players
       } else {
-        // Handle the case where response is not in the expected format
         console.error('Unexpected response format:', response);
-        return [];
+        return { team: null, players: [] }; // Return an object with null team and empty players array
       }
+    })
+  );
+}
+
+getTopScorers(leagueId: string, season: string): Observable<any> {
+  const headers = this.getHeaders(); // Using the existing getHeaders method
+  const params = new HttpParams().set('league', leagueId).set('season', season);
+
+  return this.http.get(`${this.apiUrl}/players/topscorers`, { headers, params }).pipe(
+    map((response: any) => response?.response ?? []),
+    catchError(error => {
+      console.error('Error fetching top scorers:', error);
+      return of([]); // Return an empty array in case of an error
     })
   );
 }

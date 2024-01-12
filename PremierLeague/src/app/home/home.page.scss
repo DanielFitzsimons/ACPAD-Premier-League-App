@@ -25,3 +25,21 @@
 #container a {
   text-decoration: none;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ion-icon {
+  margin-right: 0.5em; /* Add some space to the right of the icon */
+}
+
+
+.logout-button {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%); /* To center it vertically */
+}

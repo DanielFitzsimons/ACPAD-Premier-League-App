@@ -1,8 +1,16 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Welcome to Our Premier League App!
+      <div class="header">
+        <span>Welcome to Our Premier League App!</span>
+        <button class="logout-button" (click)="logout()">
+          <ion-icon name="log-out-outline"></ion-icon>
+          LOGOUT</button>
+      </div>
+      
+      
     </ion-title>
+    
   </ion-toolbar>
 </ion-header>
 
@@ -13,13 +21,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-  <ion-button routerLink="/login">
-    Login
-  </ion-button>
+
   <ion-button (click)="goToPremierLeague()">
     Premier League
   </ion-button>
@@ -29,4 +31,25 @@
   <ion-button (click)="seePlayers()">
 
   </ion-button>
+
+  <ion-item>
+    <ion-label>Season</ion-label>
+    <ion-select [(ngModel)]="selectedSeason" (ionChange)="loadTopScorers()">
+      <ion-select-option *ngFor="let season of seasons" [value]="season">
+        {{ season }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-list>
+    <ion-item *ngFor="let scorer of topScorers">
+      <ion-avatar slot="start">
+        <img [src]="scorer.photo" [alt]="scorer.name" onError="this.src='path_to_placeholder_image';">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ scorer.name }}</h2>
+        <p>Goals: {{ scorer.goals }}</p>
+        <p>Team: {{ scorer.team }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
