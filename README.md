@@ -100,22 +100,28 @@ async presentPopover(ev: any) {
 ## Application Architecture
 
 Pages and Their Purposes
-Fixtures Page: Displays and manages fixture-related information. It likely includes functionality for listing upcoming matches, displaying details about specific fixtures, and possibly interacting with fixture data.
+Fixtures Page: Displays and manages fixture-related information. It likely includes functionality for listing upcoming matches, displaying details about specific fixtures, and interacting with fixture data.
 
-Login Page: Handles user authentication processes. This page is responsible for managing user login procedures, including form inputs for credentials, validation, and possibly integrating with external authentication services like Firebase.
+Login Page: Handles user authentication processes. This page is responsible for managing user login procedures, including form inputs for credentials, validation, and integrating with external authentication services like Firebase.
 
-Players Page: Dedicated to displaying player-related information. This could involve listing players, showing detailed player profiles, stats, and other relevant data about football players.
+Players Page: Dedicated to displaying player-related information. This involves listing players, showing detailed player profiles, stats, and other relevant data about football players.
 
-Fixture Page: Focuses on the details of individual football fixtures. It might provide comprehensive information about a specific match, including teams involved, scores, dates, times, and other relevant match details.
+Fixture Page: Focuses on the details of individual football fixtures. It provides comprehensive information about a specific match, including teams involved, scores, dates, and other relevant match details.
+
+Home Page: This focuses on allowing the user to navigate to each page, with the ability to navigate back from each page, here the user can see top goal scorers and players with the most assists
 
 Methods and Their Functionalities
 
 
-Fixtures Page: Methods for retrieving fixture data from a service, handling user interactions with fixture lists, and possibly methods for filtering or sorting fixtures.
-Login Page: Methods for handling form submissions, validating user inputs, communicating with authentication services, and redirecting users upon successful login.
-Players Page: Methods for fetching player data, handling user interaction with player lists, and possibly methods for searching or filtering players.
-Fixture Page: Methods specific to retrieving detailed data about a single fixture, handling any user interactions related to that fixture.
-HomePage: Methods for retrieving the players information regarding assists and amount of goals scored starting from the most for each, using the top 20.
+* Fixtures Page: Methods for retrieving fixture data from a service, handling user interactions with fixture lists, and methods for filtering or sorting fixtures.
+* Login Page: Methods for handling form submissions, validating user inputs, communicating with authentication services, and redirecting users upon successful login.
+* Players Page: Methods for fetching player data, handling user viewing in relation to the players within the current squad.
+* Fixture Page: Methods specific to retrieving detailed data about a single fixture, allowing the users to view the fixtures on the html page..
+* HomePage: Methods for retrieving the players information regarding assists and amount of goals scored starting from the most for each, using the top 20.
+* FootballService: This is where the methods for retieving the inforamtion was handled, methods for fixtures, standings, players for teams, their assists and scores where all retrieved, where the service was then injected into the pages and components.
+* AuthenticationService: Here methods for logging, registers and resetting the password where used to communicate with firebase to do the intended. I also included an enum for changing states on the single page between the desired, login, register or reset password.
+
+
 
 
 
@@ -125,7 +131,7 @@ HomePage: Methods for retrieving the players information regarding assists and a
 
 ## Roadblocks and Unfinished Functionality
 
-Discuss the issues you faced with creating your application. Provide possible solutions to these issues. What would you have done differently if you had to do this again? What did you not get finished?
+Finding news related apis was a struggle. The api i was using only provided the most relevant data which i used in the project.
 
 ## Resources
 
