@@ -77,34 +77,34 @@ export class AuthenticationService {
     return this.auth.currentUser;
   }
   
-
-
- 
-
-
- 
-
-async logout() {
-  try {
-    const result = await Dialog.confirm({
-      title: 'Logout',
-      message: 'Are you sure you want to logout?',
-    });
-
-    if (result.value) {
-      // User clicked "OK" in the dialog
-      await signOut(this.auth);
-      this.isAuthenticated = false;
-
-      this.navCtrl.navigateRoot('/login');
-    } else {
-      // User clicked "Cancel" or closed the dialog
-      console.log('Logout canceled');
+  async logout() {
+    try {
+      const result = await Dialog.confirm({
+        title: 'Logout',
+        message: 'Are you sure you want to logout?',
+      });
+  
+      if (result.value) {
+        // User clicked "OK" in the dialog
+        const loading = await this.loadingController.create({
+          message: 'Logging out...', // Optional message
+        });
+        await loading.present(); // Present the loading spinner
+  
+        await signOut(this.auth); // Replace 'this.auth' with your actual FirebaseAuth instance
+        this.isAuthenticated = false;
+  
+        await loading.dismiss(); // Dismiss the loading spinner
+        this.navCtrl.navigateRoot('/login');
+      } else {
+        // User clicked "Cancel" or closed the dialog
+        console.log('Logout canceled');
+      }
+    } catch (error) {
+      await this.loadingController.dismiss(); // Ensure loading spinner is dismissed if an error occurs
+      console.error('Error during logout: ', error);
     }
-  } catch (error) {
-    console.error('Error during logout: ', error);
   }
-}
 
   
   
