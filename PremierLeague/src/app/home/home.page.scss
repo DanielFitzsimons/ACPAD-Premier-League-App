@@ -1,13 +1,11 @@
+/* Header styling for the app */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
 }
 
-
-
-
+/* Logout button styling */
 .logout-button {
   position: absolute;
   right: 0;
@@ -17,36 +15,41 @@
   --color: #fff;
 }
 
+/* Styling for the segment container */
 .segment-container {
   padding: 10px;
-  background-color: #f8f8f8; // Choose a color that fits your theme
+  background-color: #f8f8f8; /* Choose a color that fits your theme */
 }
 
+/* Styling for player stats information container */
 .player-stats-info {
   padding: 15px;
-  background-color: #f8f8f8; // Choose a color that fits your theme
+  background-color: #f8f8f8; /* Choose a color that fits your theme */
 }
 
+/* Styling for player count container */
 .player-count-container {
   font-size: 0.9em;
   color: #333;
   margin-top: 10px;
 }
 
+/* Styling for player count badge */
 .player-count-badge {
-  background-color: #5D3FD3; // Primary color for the badge
+  background-color: #5D3FD3; /* Primary color for the badge */
   color: white;
   padding: 5px 10px;
   border-radius: 10px;
   font-weight: bold;
 }
 
+/* Styling for ion-list and ion-item */
 ion-list {
   ion-item {
     text-align: center;
     --border-radius: 8px;
-    --background: #fff; // Or use a slight off-white for less contrast
-    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Adds a subtle shadow effect
+    --background: #fff; /* use a slight off-white for less contrast */
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow effect */
     margin-bottom: 10px;
     padding: 15px;
     transition: transform 0.3s ease;
@@ -54,18 +57,20 @@ ion-list {
     display: flex;
 
     &:hover {
-      transform: translateY(-3px); // Slight raise effect on hover for desktop users
+      transform: translateY(-3px); /* Slight raise effect on hover for desktop users */
     }
   }
 
+  /* Styling for ion-avatar within ion-item */
   ion-avatar {
     --border-radius: 50%;
     --size: ;
     overflow: hidden;
-    border: 2px solid #00FF00; // Adds a border around the avatar
+    border: 2px solid #00FF00; /* Adds a border around the avatar */
     margin-right: 15px;
   }
 
+  /* Styling for ion-label within ion-item */
   ion-label {
     h2 {
       font-size: 1.2em;
@@ -80,19 +85,16 @@ ion-list {
   }
 }
 
+/* Styling for custom avatar */
 .custom-avatar {
   width: 60px; /* Set the width of ion-avatar */
   height: 60px; /* Set the height of ion-avatar */
 }
 
+/* Styling for image within custom avatar */
 .custom-avatar img {
   width: 100%; /* Set image width to fully occupy the container */
   height: 100%; /* Set image height to fully occupy the container */
   object-fit: cover; /* This will ensure that the image covers the area without stretching */
   border-radius: 50%; /* Optional: if you want a circular avatar */
 }
-
-
-
-
-

@@ -1,32 +1,39 @@
+<!-- Header section with back button, title, and league logo -->
 <ion-header>
   <ion-toolbar color="tertiary">
     <ion-buttons slot="start">
+      <!-- Back button triggering goHome() function -->
       <ion-button (click)="goHome()">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <!-- Title displaying league name, season, and "Tables" -->
     <ion-title>
       {{ league?.name }} - Season {{ selectedSeason }} - Tables
     </ion-title>
+    <!-- League logo displayed as an avatar -->
     <ion-avatar slot="start">
       <ion-img [src]="league?.logo"></ion-img>
     </ion-avatar>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
+  <!-- Container for season selection -->
   <div class="season-select-container">
     <ion-label>Season: </ion-label>
+    <!-- Dropdown for selecting a season -->
     <ion-select [(ngModel)]="selectedSeason" (ionChange)="onSeasonChange($event)">
+      <!-- Options generated dynamically based on available seasons -->
       <ion-select-option *ngFor="let season of seasons" [value]="season.year">
         {{ season.year }}
       </ion-select-option>
     </ion-select>
   </div>
 
-  <!-- Table with additional styling -->
+  <!-- Table displaying team standings with additional styling -->
   <ion-grid *ngIf="standings && standings.length > 0">
+    <!-- Header row with column labels -->
     <ion-row class="table-header">
       <ion-col size="1">#</ion-col>
       <ion-col size="1">Logo</ion-col>
@@ -40,9 +47,11 @@
       <ion-col size="1">GD</ion-col>
       <ion-col size="1" class="highlighted-column">Points</ion-col>
     </ion-row>
+    <!-- Rows displaying team standings -->
     <ion-row *ngFor="let standing of standings; let i = index" class="table-row">
       <ion-col size="1">{{ i + 1 }}</ion-col>
       <ion-col size="1" class="logo-col">
+        <!-- Team logo displayed as an image -->
         <ion-img [src]="standing.team.logo" style="width: auto; height: 30px;"></ion-img>
       </ion-col>
       <ion-col>{{ standing.team.name }}</ion-col>
@@ -56,7 +65,8 @@
       <ion-col size="1" class="highlighted-column">{{ standing.points }}</ion-col>
     </ion-row>
   </ion-grid>
-  
+
+  <!-- Text displayed if no standings are available -->
   <ion-text *ngIf="!(standings && standings.length > 0)">
     No standings available for the selected season.
   </ion-text>

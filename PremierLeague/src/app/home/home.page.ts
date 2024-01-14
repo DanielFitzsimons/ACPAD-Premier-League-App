@@ -4,34 +4,44 @@ import { AuthenticationService } from '../services/authentication.service';
 import { FootballService } from '../services/football.service';
 import { PickerController, PopoverController } from '@ionic/angular';
 import { AssistsPopoverComponent } from '../info/assists-popover/assists-popover.component';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  playerStats: any[] = [];
-  seasons: string[] = ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015','2014','2013', '2012', '2011', '2010'];
-  selectedSeason: string = this.seasons[0];
-  statType: 'scorers' | 'assists' = 'scorers';
+  playerStats: any[] = []; // Array to store player statistics
+  seasons: string[] = ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014', '2013', '2012', '2011', '2010'];
+  selectedSeason: string = this.seasons[0]; // Default selected season
+  statType: 'scorers' | 'assists' = 'scorers'; // Default statistical type (scorers or assists)
 
-  topScorersCount: number | undefined;
+  topScorersCount: number | undefined; // Count of top scorers
 
-  constructor(private navCtrl: NavController, private auth: AuthenticationService, private footballService: FootballService, private pickerCtrl: PickerController, private popoverController: PopoverController ) {}
+  constructor(
+    private navCtrl: NavController,
+    private auth: AuthenticationService,
+    private footballService: FootballService,
+    private pickerCtrl: PickerController,
+    private popoverController: PopoverController
+  ) {}
 
-  // In your component
-ngOnInit() {
-  this.loadPlayerStats();
-}
+  // Component lifecycle hook, called after component initialization
+  ngOnInit() {
+    this.loadPlayerStats(); // Load player statistics when the component is initialized
+  }
 
- loadPlayerStats() {
-    const leagueId = '39';
+  // Method to load player statistics based on the selected season and statistical type
+  loadPlayerStats() {
+    const leagueId = '39'; // ID of the football league
     if (this.statType === 'scorers') {
+      // Fetch top scorers data
       this.footballService.getTopScorers(leagueId, this.selectedSeason).subscribe(
         data => this.processPlayerStats(data),
         error => console.error('Error fetching player stats:', error)
       );
     } else {
+      // Fetch top assists data
       this.footballService.getTopAssists(leagueId, this.selectedSeason).subscribe(
         data => this.processPlayerStats(data),
         error => console.error('Error fetching player stats:', error)
@@ -39,6 +49,7 @@ ngOnInit() {
     }
   }
 
+  // Method to process and transform player statistics data
   processPlayerStats(data: any) {
     this.playerStats = data.map((item: any) => {
       return {
@@ -48,36 +59,37 @@ ngOnInit() {
         photo: item.player.photo,
       };
     });
-    this.topScorersCount = this.playerStats.length;
+    this.topScorersCount = this.playerStats.length; // Update the count of top scorers
   }
 
+  // Method to switch to display top scorers
   showScorers() {
     this.statType = 'scorers';
     this.loadPlayerStats();
   }
 
+  // Method to switch to display top assists
   showAssists() {
     this.statType = 'assists';
     this.loadPlayerStats();
   }
 
-
-
-
-
+  // Method to navigate to the Premier League component
   goToPremierLeague() {
-    // Use NavController to navigate to the Premier League component
     this.navCtrl.navigateForward('/premier-league');
   }
 
-  goFixtures(){
+  // Method to navigate to the Fixtures component
+  goFixtures() {
     this.navCtrl.navigateForward('/fixtures');
   }
 
-  seePlayers(){
-    this.navCtrl.navigateForward('/players')
+  // Method to navigate to the Players component
+  seePlayers() {
+    this.navCtrl.navigateForward('/players');
   }
 
+  // Method to open a season picker dialog
   async openSeasonPicker() {
     const picker = await this.pickerCtrl.create({
       columns: [
@@ -103,6 +115,7 @@ ngOnInit() {
     await picker.present();
   }
 
+  // Method to present a popover for assists information
   async presentPopover(ev: any, popoverContent: TemplateRef<any>) {
     const popover = await this.popoverController.create({
       component: AssistsPopoverComponent,
@@ -112,8 +125,8 @@ ngOnInit() {
     return await popover.present();
   }
 
+  // Method to log out the user
   async logout() {
     await this.auth.logout();
-    
   }
 }

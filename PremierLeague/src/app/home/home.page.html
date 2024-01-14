@@ -1,43 +1,3 @@
-<ng-template #popoverContent>
-  <ion-content>
-    <ion-list>
-      <ion-item>
-        <ion-label>
-          <h2>Assists Information</h2>
-          <p>The assist count does not apply to the years before 2018.</p>
-        </ion-label>
-      </ion-item>
-    </ion-list>
-  </ion-content>
-</ng-template>
-
-<ion-menu side="start" menuId="first" contentId="main-content">
-  <ion-header>
-    <ion-toolbar color="tertiary">
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ion-list>
-      <ion-item class="menu-item-hover" (click)="goToPremierLeague()">
-        <ion-icon name="football-outline" slot="start"></ion-icon>
-        Tables
-      </ion-item>
-      <ion-item class="menu-item-hover" (click)="goFixtures()">
-        <ion-icon name="calendar-outline" slot="start"></ion-icon>
-        Fixtures
-      </ion-item>
-      <ion-item class="menu-item-hover" (click)="seePlayers()">
-        <ion-icon name="people-outline" slot="start"></ion-icon>
-        Players
-      </ion-item>
-      
-    </ion-list>
-  </ion-content>
-</ion-menu>
-
-<ion-router-outlet id="main-content"></ion-router-outlet>
-
 <ion-header [translucent]="true">
   <ion-toolbar color="tertiary" >
     <ion-buttons slot="start">
@@ -61,6 +21,7 @@
   </ion-item>
 
   <div class="segment-container">
+    <!-- Segment for switching between top scorers and top assists -->
     <ion-segment [(ngModel)]="statType" (ionChange)="loadPlayerStats()">
       <ion-segment-button value="scorers">
         Top Scorers
@@ -71,6 +32,7 @@
     </ion-segment>
   </div>
 
+  <!-- Button to open popover with information -->
   <ion-button (click)="presentPopover($event, popoverContent)">
     <ion-icon name="information-circle"></ion-icon>
   </ion-button>
@@ -88,6 +50,7 @@
       </ion-avatar>
       <ion-label>
         <h2>{{ stat.name }}</h2>
+        <!-- Display either Goals or Assists based on statType -->
         <p>{{ statType === 'scorers' ? 'Goals' : 'Assists' }}: {{ stat.count }}</p>
         <p>Team: {{ stat.team }}</p>
       </ion-label>

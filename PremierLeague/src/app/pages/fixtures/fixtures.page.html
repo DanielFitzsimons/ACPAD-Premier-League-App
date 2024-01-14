@@ -1,54 +1,65 @@
+<!-- Header section -->
 <ion-header>
   <ion-toolbar color="tertiary">
+    <!-- Back button -->
     <ion-buttons slot="start">
       <ion-button (click)="goHome()">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-      <ion-avatar slot="start">
-        <ion-img [src]="league?.logo"></ion-img>
-      </ion-avatar>
-      <ion-label>
-        <h1>{{ league?.name }} - Fixtures</h1>
-      </ion-label>
+    <!-- League logo -->
+    <ion-avatar slot="start">
+      <ion-img [src]="league?.logo"></ion-img>
+    </ion-avatar>
+    <!-- League name and Fixtures title -->
+    <ion-label>
+      <h1>{{ league?.name }} - Fixtures</h1>
+    </ion-label>
   </ion-toolbar>
 </ion-header>
 
+<!-- Content section -->
 <ion-content>
+  <!-- Season selection dropdown -->
   <ion-select [(ngModel)]="selectedSeason" (ionChange)="onSeasonChange($event.target.value)">
     <ion-select-option value="2023">2023/2024</ion-select-option>
     <ion-select-option value="2022">2022/2023</ion-select-option>
     <ion-select-option value="2021">2021/2022</ion-select-option>
     <ion-select-option value="2020">2020/2021</ion-select-option>
-
   </ion-select>
 
-<!-- Section to display fixtures -->
-<ion-grid *ngIf="fixtures && fixtures.length > 0">
-  <ion-row class="table-header">
-    <ion-col>Date</ion-col>
-    <ion-col>Home Team</ion-col>
-    <ion-col>Home Goals</ion-col>
-    <ion-col>Away Goals</ion-col>
-    <ion-col>Away Team</ion-col>
-  </ion-row>
-  <!-- Repeating fixture rows -->
-  <ion-row *ngFor="let fixture of fixtures">
-    <ion-col class="date-col">{{ fixture.fixture.date | date: 'shortDate' }}</ion-col>
-    <ion-col class="team-info">
-    <ion-img class="team-crest" [src]="fixture.teams.home.logo"></ion-img>
-  <ion-label class="team-name">{{ fixture.teams.home.name }}</ion-label>
-</ion-col>
-<ion-col class="score-col">{{ fixture.goals.home }}</ion-col>
-<ion-col class="score-col">{{ fixture.goals.away }}</ion-col>
-<ion-col class="team-info">
-  <ion-img class="team-crest" [src]="fixture.teams.away.logo"></ion-img>
-  <ion-label class="team-name">{{ fixture.teams.away.name }}</ion-label>
-</ion-col>
-    
-  </ion-row>
-</ion-grid>
+  <!-- Section to display fixtures -->
+  <ion-grid *ngIf="fixtures && fixtures.length > 0">
+    <!-- Table header row -->
+    <ion-row class="table-header">
+      <ion-col>Date</ion-col>
+      <ion-col>Home Team</ion-col>
+      <ion-col>Home Goals</ion-col>
+      <ion-col>Away Goals</ion-col>
+      <ion-col>Away Team</ion-col>
+    </ion-row>
+    <!-- Repeating fixture rows -->
+    <ion-row *ngFor="let fixture of fixtures">
+      <ion-col class="date-col">{{ fixture.fixture.date | date: 'shortDate' }}</ion-col>
+      <!-- Home team information -->
+      <ion-col class="team-info">
+        <ion-img class="team-crest" [src]="fixture.teams.home.logo"></ion-img>
+        <ion-label class="team-name">{{ fixture.teams.home.name }}</ion-label>
+      </ion-col>
+      <!-- Home team goals -->
+      <ion-col class="score-col">{{ fixture.goals.home }}</ion-col>
+      <!-- Away team goals -->
+      <ion-col class="score-col">{{ fixture.goals.away }}</ion-col>
+      <!-- Away team information -->
+      <ion-col class="team-info">
+        <ion-img class="team-crest" [src]="fixture.teams.away.logo"></ion-img>
+        <ion-label class="team-name">{{ fixture.teams.away.name }}</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-<ion-text *ngIf="!(fixtures && fixtures.length > 0)">
-  No fixtures available for the selected season.
-</ion-text>
+  <!-- Message for no fixtures available -->
+  <ion-text *ngIf="!(fixtures && fixtures.length > 0)">
+    No fixtures available for the selected season.
+  </ion-text>
+</ion-content>

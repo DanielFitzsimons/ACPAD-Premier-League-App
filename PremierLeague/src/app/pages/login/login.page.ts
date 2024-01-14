@@ -30,12 +30,12 @@ export class LoginPage implements OnInit {
     
   ) {}
 
-  get email(){
-    return this.credentials.controls.email;
+  get email() {
+    return this.credentials.controls.email; // Getter for email form control
   }
 
-  get password(){
-    return this.credentials.controls.password;
+  get password() {
+    return this.credentials.controls.password; // Getter for password form control
   }
 
 
@@ -46,21 +46,20 @@ export class LoginPage implements OnInit {
     await loading.present();
 
     try {
-      const user = await this.auth.login(this.credentials.getRawValue());
+      const user = await this.auth.login(this.credentials.getRawValue()); // Attempt to log in using AuthService
       if (user) {
-        this.router.navigateByUrl('/home', { replaceUrl: true });
+        this.router.navigateByUrl('/home', { replaceUrl: true }); // Navigate to home page on successful login
       } else {
-        this.showAlert('Login failed', 'Invalid credentials.');
+        this.showAlert('Login failed', 'Invalid credentials.'); // Show alert on unsuccessful login
       }
     } catch (error: unknown) {
       let message = 'An error occurred during login.';
       if (error instanceof Error) {
-        // Now we know that error is an instance of Error, we can access its message property.
-        message = error.message;
+        message = error.message; // Get error message if available
       }
-      this.showAlert('Login failed', message);
+      this.showAlert('Login failed', message); // Show alert on error during login
     } finally {
-      await loading.dismiss();
+      await loading.dismiss(); // Dismiss loading spinner
     }
   }
 
@@ -104,15 +103,15 @@ export class LoginPage implements OnInit {
   }
 
   loginState() {
-    this.state = AuthenticatorCompState.LOGIN;  
+    this.state = AuthenticatorCompState.LOGIN;  //set state to login state
   }
 
   registerState() {
-    this.state = AuthenticatorCompState.REGISTER;  
+    this.state = AuthenticatorCompState.REGISTER;  //set state to register state
   }
 
   resetPassState() {
-    this.state = AuthenticatorCompState.FORGOT_PASSWORD;  
+    this.state = AuthenticatorCompState.FORGOT_PASSWORD;  //set state to reset password state
   }
 
   isLoginState() {
@@ -138,6 +137,7 @@ export class LoginPage implements OnInit {
     }
   }
 
+  //show alert with a custom style
   async showAlert(header: string, message: string) {
     const alert = await this.alertController.create({
       cssClass: 'top-alert',

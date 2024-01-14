@@ -1,6 +1,4 @@
-
-  
- /* Overall page styles */
+/* Overall page styles */
 .season-select-container {
   margin: 15px;
   display: flex;
@@ -20,11 +18,11 @@
 }
 
 .highlighted-column {
-  background-color: #e8e8e8; 
+  background-color: #e8e8e8; /* Light gray background for highlighted columns */
 }
 
 .table-row {
-  border-bottom: 1px solid #dcdcdc;
+  border-bottom: 1px solid #dcdcdc; /* Border between table rows */
 }
 
 ion-col {
@@ -40,28 +38,24 @@ ion-col {
 }
 
 .team-logo {
-max-width: 100%;
-max-height: 30px;
-object-fit: contain;
+  max-width: 100%;
+  max-height: 30px;
+  object-fit: contain; /* Ensure logo maintains aspect ratio */
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-ion-col {
-padding: 4px; /* Smaller padding on smaller screens */
-}
+  ion-col {
+    padding: 4px; /* Smaller padding on smaller screens */
+  }
 }
 
 /* If you're using SCSS, you can nest the media query inside the ion-col rule */
 ion-col {
-padding: 8px;
-text-align: center;
+  padding: 8px;
+  text-align: center;
 
-@media (max-width: 768px) {
-padding: 4px;
+  @media (max-width: 768px) {
+    padding: 4px; /* Adjusted padding for smaller screens */
+  }
 }
-}
-  
-
-  
-  

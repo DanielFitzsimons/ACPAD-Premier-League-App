@@ -1,11 +1,14 @@
+<!-- Header Section -->
 <ion-header>
   <ion-toolbar color="tertiary">
     <ion-buttons slot="start">
+      <!-- Back button -->
       <ion-button (click)="goHome()">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>
+      <!-- Display team logo and name if teamInfo is available, otherwise show default text -->
       <div *ngIf="teamInfo">
         <img [src]="teamInfo.logo" alt="{{ teamInfo.name }} logo" style="height: 30px;">
         {{ teamInfo.name }} Players
@@ -17,14 +20,18 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- Main Content Section -->
 <ion-content>
+  <!-- Team Selection Dropdown -->
   <ion-item>
     <ion-label>Team</ion-label>
     <ion-select [(ngModel)]="selectedTeamId" (ionChange)="loadTeamPlayers()">
+      <!-- Options for selecting a team -->
       <ion-select-option *ngFor="let teamId of teamIds" [value]="teamId">
         Team {{ teamId }}
       </ion-select-option>
     </ion-select>
+    <!-- Information button to present popover -->
     <ion-buttons slot="end">
       <ion-button (click)="presentPopover($event)">
         <ion-icon name="information-circle"></ion-icon>
@@ -32,14 +39,19 @@
     </ion-buttons>
   </ion-item>
 
+  <!-- Grid to display player cards -->
   <ion-grid>
     <ion-row>
+      <!-- Loop through players and create a card for each player -->
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let player of players">
         <ion-card class="player-card">
           <ion-card-header class="player-card-header">
+            <!-- Player photo -->
             <img [src]="player.photo" alt="Player photo" class="player-image">
+            <!-- Player name -->
             <ion-card-title class="player-name">{{ player.name }}</ion-card-title>
           </ion-card-header>
+          <!-- Player information -->
           <ion-card-content class="player-info">
             <p class="player-detail">Age: {{ player.age }}</p>
             <p class="player-detail">Position: {{ player.position }}</p>
@@ -50,5 +62,3 @@
     </ion-row>
   </ion-grid>
 </ion-content>
-
-

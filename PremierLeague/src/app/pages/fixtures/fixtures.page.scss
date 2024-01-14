@@ -1,5 +1,3 @@
-
-
 /* General styling */
 ion-content {
   --background: #f7f7f7; /* Light background for the content area */
@@ -82,6 +80,7 @@ ion-col.header {
   }
 }
 
+/* Table header */
 .table-header {
   background-color: #5260ff; /* A darker shade for contrast */
   color: #ffffff; /* White color for header text */
@@ -90,7 +89,6 @@ ion-col.header {
   font-size: 1em; /* Slightly larger font size for headers */
   font-weight: bold; /* Bold font weight for headers */
   border-bottom: 2px solid #f2f2f2; /* Light border for separation */
-  
 }
 
 /* Header individual cell styles */
