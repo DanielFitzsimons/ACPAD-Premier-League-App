@@ -1,70 +1,99 @@
-/* Add spacing between columns */
-ion-col {
-    padding: 5px; /* Adjust the padding as needed */
-  }
-  
-  /* Add spacing between rows */
-  ion-row {
-    margin-bottom: 10px; /* Adjust the margin as needed */
-  }
-  
-  /* Style the headers (optional) */
-  ion-row:first-child {
-    font-weight: bold; /* Make the headers bold */
+
+
+/* General styling */
+ion-content {
+  --background: #f7f7f7; /* Light background for the content area */
+}
+
+/* Fixture grid */
+ion-grid {
+  --ion-grid-background-color: var(--background);
+  --ion-grid-column-padding: 0;
+  --ion-grid-row-padding: 0;
+  margin-top: 20px;
+}
+
+/* Fixture row */
+ion-row {
+  align-items: center;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0; /* subtle separation between rows */
+  transition: background-color 0.3s;
+}
+
+ion-row:hover {
+  background-color: #f5f5f5; /* hover effect for rows */
+}
+
+/* Date column */
+.date-col {
+  font-size: 0.9rem;
+  color: #666;
+  padding: 15px 10px;
+}
+
+/* Team info styling */
+.team-info {
+  display: flex;
+  align-items: center;
+  padding: 15px 10px;
+}
+
+.team-crest {
+  width: 24px; /* smaller crests */
+  height: auto;
+  margin-right: 8px;
+}
+
+.team-name {
+  font-weight: 600; /* slightly bolder font for team names */
+}
+
+/* Score column */
+.score-col {
+  font-weight: 700; /* bold for scores */
+  font-size: 1.1rem;
+  padding: 15px 10px;
+  text-align: center;
+  color: var(--ion-color-primary);
+}
+
+/* Header styling */
+ion-col.header {
+  background-color: #d1e0ff; /* Light blue background for headers */
+  color: #333;
+  padding: 15px 10px;
+  font-weight: 700; /* bold for headers */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .team-info {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  table {
-    width: 100%;
-    border-collapse: collapse; /* Ensures that table borders are collapsed into a single border */
-    font-family: 'Arial', sans-serif; /* Modern font */
-  }
-  
-  th, td {
-    padding: 10px;
-    text-align: left; /* Aligns text to the left */
-  }
-  
-  th {
-    background-color: #007bff; /* Premier League blue for header */
-    color: white;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f2f2f2; /* Alternating row colors */
-  }
-  
-  tr:nth-child(odd) {
-    background-color: #ffffff; /* Alternating row colors */
-  }
-  
-  td {
-    border-bottom: 1px solid #ddd; /* Lines between each fixture */
-  }
-  
-  .team-name {
-    font-weight: bold; /* Make team names bold */
-  }
-  
   .team-crest {
-    width: 30px; /* Adjust size of team crests */
-    height: auto;
-    vertical-align: middle; /* Align crests with text */
+    margin: 0;
   }
-  
-  .team-info {
-    display: flex; /* Aligns children (logo and name) in a row */
-    align-items: center; /* Centers children vertically */
-  }
-  
-  .team-crest {
-    width: 30px; /* Adjust the size as needed */
-    height: auto;
-    margin-right: 8px; /* Add some space between the logo and the name */
-  }
-  
+
   .team-name {
-    font-weight: bold; /* Make the team name bold */
+    margin-top: 8px;
   }
+}
+
+.table-header {
+  background-color: #5260ff; /* A darker shade for contrast */
+  color: #ffffff; /* White color for header text */
+  text-align: center; /* Center align the header text */
+  padding: 15px 0; /* Top and bottom padding for space */
+  font-size: 1em; /* Slightly larger font size for headers */
+  font-weight: bold; /* Bold font weight for headers */
+  border-bottom: 2px solid #f2f2f2; /* Light border for separation */
   
-  
-  
+}
+
+/* Header individual cell styles */
+.table-header ion-col {
+  padding: 10px 5px; 
+}

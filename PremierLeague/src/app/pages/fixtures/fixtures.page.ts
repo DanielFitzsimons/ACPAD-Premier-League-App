@@ -10,7 +10,7 @@ import { catchError, of } from 'rxjs';
 export class FixturesPage implements OnInit {
   league: any;
   fixtures: any[] = [];
-  selectedSeason: string = '2020';
+  selectedSeason: string = '2023';
   constructor(private footballService: FootballService, private navctrl: NavController,) {}
 
   ngOnInit(): void {
