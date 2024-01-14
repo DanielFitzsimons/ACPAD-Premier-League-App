@@ -116,7 +116,7 @@ export class HomePage {
   }
 
   // Method to present a popover for assists information
-  async presentPopover(ev: any, popoverContent: TemplateRef<any>) {
+  async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: AssistsPopoverComponent,
       event: ev,
