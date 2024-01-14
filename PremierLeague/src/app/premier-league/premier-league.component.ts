@@ -61,7 +61,6 @@ export class PremierLeagueComponent implements OnInit {
 
  private fetchStandingsForSeason(selectedSeason: number) {
   const leagueId = '39'; // Replace with the actual league ID
-// Inside your component's fetchStandingsForSeason or similar method
 
 this.footballService.getStandings(leagueId, selectedSeason.toString()).subscribe(
   (data) => {
