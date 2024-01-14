@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -38,48 +39,54 @@ export class LoginPage implements OnInit {
   }
 
 
-  async login(){
-    // Call the login method from the AuthService. This returns a user object if successful, or null if unsuccessful.
-    const user = await this.auth.login(this.credentials.getRawValue());
-    // Log the user object to the console. This will be `null` if the user was not logged in.
-    console.log('🚀 ~ file: login.page.ts:73 ~ LoginPage ~ login ~ user', user);
-    // Dismiss the loading spinner
+  async login() {
+    const loading = await this.loadingController.create({
+      message: 'Logging in...',
+    });
+    await loading.present();
 
-    // If the user is successfully logged in, redirect to the home page. Otherwise, display an error via alert.
-    if (user) {
-      this.router.navigateByUrl('/home', { replaceUrl: true });
-     
-    } else {
-    
+    try {
+      const user = await this.auth.login(this.credentials.getRawValue());
+      if (user) {
+        this.router.navigateByUrl('/home', { replaceUrl: true });
+      } else {
+        this.showAlert('Login failed', 'Invalid credentials.');
+      }
+    } catch (error: unknown) {
+      let message = 'An error occurred during login.';
+      if (error instanceof Error) {
+        // Now we know that error is an instance of Error, we can access its message property.
+        message = error.message;
+      }
+      this.showAlert('Login failed', message);
+    } finally {
+      await loading.dismiss();
     }
-
-    
   }
+
   async register() {
-    
-    // Call the register method from the AuthService. This returns a user object if successful, or null if unsuccessful.
-    const user = await this.auth.register(
-      this.credentials.getRawValue()// <-- Pass the raw value of the form fields to the register method
-    );
-    // Log the user object to the console. This will be `null` if the user was not created.
-    console.log(
-      '🚀 ~ file: login.page.ts:50 ~ LoginPage ~ register ~ user',
-      user
-    );
-    // Dismiss the loading spinner
-    
+    const loading = await this.loadingController.create({
+      message: 'Registering...',
+    });
+    await loading.present();
 
-    // If the user is successfully created, redirect to the home page. Otherwise, display an error.
-    if (user) {
-      this.router.navigateByUrl('/home', { replaceUrl: true });
-      
-      
-    } else {
-      
-      this.showAlert('Registration failed', 'Please try again!');
+    try {
+      const user = await this.auth.register(this.credentials.getRawValue());
+      if (user) {
+        this.router.navigateByUrl('/home', { replaceUrl: true });
+      } else {
+        this.showAlert('Registration failed', 'Could not create account.');
+      }
+    } catch (error: unknown) {
+      let message = 'An error occurred during registration.';
+      if (error instanceof Error) {
+        // Now we know that error is an instance of Error, we can access its message property.
+        message = error.message;
+      }
+      this.showAlert('Registration failed', message);
+    } finally {
+      await loading.dismiss();
     }
-
-    
   }
 
   async sendReset(){
@@ -105,7 +112,7 @@ export class LoginPage implements OnInit {
   }
 
   resetPassState() {
-    this.state = AuthenticatorCompState.FORGOT_PASSWORD;  // 
+    this.state = AuthenticatorCompState.FORGOT_PASSWORD;  
   }
 
   isLoginState() {
@@ -133,7 +140,7 @@ export class LoginPage implements OnInit {
 
   async showAlert(header: string, message: string) {
     const alert = await this.alertController.create({
-      cssClass: 'top-alert', // Custom CSS class for positioning
+      cssClass: 'top-alert',
       header,
       message,
       buttons: ['OK'],
