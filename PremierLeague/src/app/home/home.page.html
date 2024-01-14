@@ -1,54 +1,95 @@
+<ng-template #popoverContent>
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          <h2>Assists Information</h2>
+          <p>The assist count does not apply to the years before 2018.</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ng-template>
+
+<ion-menu side="start" menuId="first" contentId="main-content">
+  <ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item class="menu-item-hover" (click)="goToPremierLeague()">
+        <ion-icon name="football-outline" slot="start"></ion-icon>
+        Tables
+      </ion-item>
+      <ion-item class="menu-item-hover" (click)="goFixtures()">
+        <ion-icon name="calendar-outline" slot="start"></ion-icon>
+        Fixtures
+      </ion-item>
+      <ion-item class="menu-item-hover" (click)="seePlayers()">
+        <ion-icon name="people-outline" slot="start"></ion-icon>
+        Players
+      </ion-item>
+      
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-router-outlet id="main-content"></ion-router-outlet>
+
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="tertiary" >
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button> 
+    </ion-buttons>
     <ion-title>
       <div class="header">
-        <span>Welcome to Our Premier League App!</span>
-        <button class="logout-button" (click)="logout()">
+        PremierLeagueApp
+        <ion-button class="logout-button" (click)="logout()">
           <ion-icon name="log-out-outline"></ion-icon>
-          LOGOUT</button>
+        </ion-button>
       </div>
-      
-      
     </ion-title>
-    
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Premier League</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-
-  <ion-button (click)="goToPremierLeague()">
-    Premier League
-  </ion-button>
-  <ion-button (click)="goFixtures()">
-    Fixtures
-  </ion-button>
-  <ion-button (click)="seePlayers()">
-
-  </ion-button>
-
-  <ion-item>
+<ion-content>
+  <ion-item lines="none">
     <ion-label>Season</ion-label>
-    <ion-select [(ngModel)]="selectedSeason" (ionChange)="loadTopScorers()">
-      <ion-select-option *ngFor="let season of seasons" [value]="season">
-        {{ season }}
-      </ion-select-option>
-    </ion-select>
+    <ion-button (click)="openSeasonPicker()">{{ selectedSeason }}</ion-button>
   </ion-item>
+
+  <div class="segment-container">
+    <ion-segment [(ngModel)]="statType" (ionChange)="loadPlayerStats()">
+      <ion-segment-button value="scorers">
+        Top Scorers
+      </ion-segment-button>
+      <ion-segment-button value="assists">
+        Top Assists
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <ion-button (click)="presentPopover($event, popoverContent)">
+    <ion-icon name="information-circle"></ion-icon>
+  </ion-button>
+  <div class="player-stats-info">
+    <h2>Season {{ selectedSeason }}</h2>
+    <div class="player-count-container">
+      Number of Players: <span class="player-count-badge">{{ playerStats.length }}</span>
+    </div>
+  </div>
+
   <ion-list>
-    <ion-item *ngFor="let scorer of topScorers">
-      <ion-avatar slot="start">
-        <img [src]="scorer.photo" [alt]="scorer.name" onError="this.src='path_to_placeholder_image';">
+    <ion-item *ngFor="let stat of playerStats">
+      <ion-avatar class="custom-avatar" >
+        <img [src]="stat.photo" [alt]="stat.name" onError="this.src='path_to_placeholder_image';">
       </ion-avatar>
       <ion-label>
-        <h2>{{ scorer.name }}</h2>
-        <p>Goals: {{ scorer.goals }}</p>
-        <p>Team: {{ scorer.team }}</p>
+        <h2>{{ stat.name }}</h2>
+        <p>{{ statType === 'scorers' ? 'Goals' : 'Assists' }}: {{ stat.count }}</p>
+        <p>Team: {{ stat.team }}</p>
       </ion-label>
     </ion-item>
   </ion-list>
