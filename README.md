@@ -100,7 +100,7 @@ async presentPopover(ev: any) {
 ## Application Architecture
 
 Pages and Their Purposes
-Fixtures Page: Displays and manages fixture-related information. It likely includes functionality for listing upcoming matches, displaying details about specific fixtures, and interacting with fixture data.
+Fixtures Page: Displays and manages fixture-related information. It includes functionality for listing upcoming matches, displaying details about specific fixtures, and interacting with fixture data.
 
 Login Page: Handles user authentication processes. This page is responsible for managing user login procedures, including form inputs for credentials, validation, and integrating with external authentication services like Firebase.
 
