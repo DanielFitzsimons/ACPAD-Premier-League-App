@@ -98,6 +98,19 @@ getTopScorers(leagueId: string, season: string): Observable<any> {
   );
 }
 
+getTopAssists(leagueId: string, season: string): Observable<any> {
+  const headers = this.getHeaders(); // Using the existing getHeaders method
+  const params = new HttpParams().set('league', leagueId).set('season', season);
+
+  return this.http.get(`${this.apiUrl}/players/topassists`, { headers, params }).pipe(
+    map((response: any) => response?.response ?? []),
+    catchError(error => {
+      console.error('Error fetching top assists:', error);
+      return of([]); // Return an empty array in case of an error
+    })
+  );
+}
+
 
 }
 
