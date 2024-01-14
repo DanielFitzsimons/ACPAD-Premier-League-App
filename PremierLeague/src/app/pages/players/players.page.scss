@@ -1,0 +1,52 @@
+.player-card {
+    border: 1px solid #00FF00; /* Neon green border */
+    background-color: #FFFFFF; /* Using white background for the card for better contrast */
+    color: #5D3FD3; /* Deep purple text, assuming it's readable on white */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin: 1rem; /* Add some spacing around the cards */
+  }
+  
+  .player-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .player-card img {
+    display: block;
+    margin-left: auto; /* Centers the image horizontally */
+    margin-right: auto; /* Centers the image horizontally */
+    max-height: 150px; /* Adjust based on your design preference */
+    max-width: 100%; /* Ensures the image does not exceed its container's width */
+    object-fit: cover; /* Adjusts the image's fit within its box */
+    border-bottom: 4px solid #00FF00; /* Neon green underline for the image */
+  }
+  
+  .player-name {
+    font-weight: bold;
+    color: #5D3FD3; /* Deep purple text for the player's name */
+    text-align: center;
+  }
+  
+  .player-info {
+    padding: 0.5rem;
+    background-color: #FFFFFF; /* Keeping white for better readability */
+    color: #5D3FD3; /* Deep purple text for player info */
+    text-align: center;
+  }
+  
+  .player-detail {
+    font-size: 0.9rem;
+    color: #5D3FD3; /* Deep purple text for details */
+    margin: 0.25rem 0;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .player-card img {
+      max-height: 100px; /* Smaller images on mobile */
+    }
+  }
+  

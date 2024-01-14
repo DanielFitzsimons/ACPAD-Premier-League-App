@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FootballService } from 'src/app/services/football.service';
-import { NavController } from '@ionic/angular';
+import { NavController, PopoverController  } from '@ionic/angular';
+import { TeamsSquadsPopoverComponent } from 'src/app/info/teams-squads-popover/teams-squads-popover.component';
 @Component({
   selector: 'app-players',
   templateUrl: './players.page.html',
@@ -12,7 +13,7 @@ export class PlayersPage implements OnInit {
   players: any[] = [];
   teamInfo: any;
 
-  constructor(private footballService: FootballService, private navCtrl: NavController) {}
+  constructor(private footballService: FootballService, private navCtrl: NavController, private popoverController: PopoverController) {}
 
   ngOnInit() {
     this.selectedTeamId = this.teamIds[0];
@@ -31,6 +32,15 @@ export class PlayersPage implements OnInit {
         }
       );
     }
+  }
+  
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: TeamsSquadsPopoverComponent,
+      event: ev,
+      translucent: true
+    });
+    await popover.present();
   }
 
   goHome(){

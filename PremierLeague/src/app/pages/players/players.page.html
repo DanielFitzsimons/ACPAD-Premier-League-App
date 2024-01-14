@@ -1,12 +1,11 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
     <ion-buttons slot="start">
       <ion-button (click)="goHome()">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>
-     
       <div *ngIf="teamInfo">
         <img [src]="teamInfo.logo" alt="{{ teamInfo.name }} logo" style="height: 30px;">
         {{ teamInfo.name }} Players
@@ -26,23 +25,30 @@
         Team {{ teamId }}
       </ion-select-option>
     </ion-select>
+    <ion-buttons slot="end">
+      <ion-button (click)="presentPopover($event)">
+        <ion-icon name="information-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-item>
 
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let player of players">
-        <ion-card>
-          <img [src]="player.photo" alt="Player photo">
-          <ion-card-header>
-            <ion-card-title>{{ player.name }}</ion-card-title>
+        <ion-card class="player-card">
+          <ion-card-header class="player-card-header">
+            <img [src]="player.photo" alt="Player photo" class="player-image">
+            <ion-card-title class="player-name">{{ player.name }}</ion-card-title>
           </ion-card-header>
-          <ion-card-content>
-            <p>Age: {{ player.age }}</p>
-            <p>Position: {{ player.position }}</p>
-            <p>Number: {{ player.number }}</p>
+          <ion-card-content class="player-info">
+            <p class="player-detail">Age: {{ player.age }}</p>
+            <p class="player-detail">Position: {{ player.position }}</p>
+            <p class="player-detail">Number: {{ player.number }}</p>
           </ion-card-content>
-          </ion-card>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
+
+
