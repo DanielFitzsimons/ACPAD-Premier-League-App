@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FootballService } from 'src/app/services/football.service';
-import { NavController } from '@ionic/angular';
+import { NavCo}
+
 @Component({
   selector: 'app-fixture',
   templateUrl: './fixture.page.html',
