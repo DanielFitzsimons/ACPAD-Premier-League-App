@@ -40,7 +40,8 @@ List the instructions step by step
     1. Install Angular CLI - npm install -g @angular/cli
     2. Log in to Firebase - firebase login
     3. Install capacitor plugin npm install @capacitor/dialog
-    4. ionic serve
+    4. npm install
+    5. ionic serve
             :
             :
 ```
