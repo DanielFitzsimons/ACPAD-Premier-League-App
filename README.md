@@ -119,7 +119,7 @@ HomePage: Methods for retrieving the players information regarding assists and a
 
 
 
-![alt text](/architecture.png)
+![alt text](/architectures.png)
 
 
 
